@@ -16,6 +16,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: dev
-      POSTGRES_DB: sf-responsible
+      POSTGRES_DB: responsible
     ports:
       - "5432:5432"
