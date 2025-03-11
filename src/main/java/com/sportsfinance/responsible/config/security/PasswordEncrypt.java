@@ -1,4 +1,4 @@
-package com.sportsfinance.responsible.domain.config;
+package com.sportsfinance.responsible.config.security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

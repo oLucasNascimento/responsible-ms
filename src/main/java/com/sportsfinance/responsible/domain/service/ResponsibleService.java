@@ -1,9 +1,11 @@
 package com.sportsfinance.responsible.domain.service;
 
-import com.sportsfinance.responsible.api.dto.ResponsibleDTO;
+import com.sportsfinance.responsible.api.dto.AuthenticateResponsibleDTO;
+import com.sportsfinance.responsible.api.dto.CreateResponsibleDTO;
 
 public interface ResponsibleService {
 
-    ResponsibleDTO createResponsible(ResponsibleDTO responsibleDTO);
+    CreateResponsibleDTO createResponsible(CreateResponsibleDTO createResponsibleDTO);
+    AuthenticateResponsibleDTO authenticateResponsible(AuthenticateResponsibleDTO authenticateResponsibleDTO);
 
 }

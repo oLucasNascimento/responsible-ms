@@ -1,10 +1,12 @@
 package com.sportsfinance.responsible.api.controller;
 
-import com.sportsfinance.responsible.api.dto.ResponsibleDTO;
+import com.sportsfinance.responsible.api.dto.AuthenticateResponsibleDTO;
+import com.sportsfinance.responsible.api.dto.CreateResponsibleDTO;
+import com.sportsfinance.responsible.api.dto.ResponsibleLoginDTO;
+import com.sportsfinance.responsible.config.security.TokenService;
 import com.sportsfinance.responsible.domain.service.ResponsibleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +19,19 @@ public class ResponsibleController {
     @Autowired
     private ResponsibleService service;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/create")
-    public ResponseEntity<ResponsibleDTO> createResponsible(@RequestBody ResponsibleDTO responsibleDTO) {
-        ResponsibleDTO responsible = this.service.createResponsible(responsibleDTO);
+    public ResponseEntity<CreateResponsibleDTO> createResponsible(@RequestBody CreateResponsibleDTO createResponsibleDTO) {
+        CreateResponsibleDTO responsible = this.service.createResponsible(createResponsibleDTO);
         return ResponseEntity.ok(responsible);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ResponsibleLoginDTO> authenticateResponsible(@RequestBody AuthenticateResponsibleDTO authResponsible) {
+        String token = this.tokenService.generateToken(this.service.authenticateResponsible(authResponsible));
+        return ResponseEntity.ok(new ResponsibleLoginDTO(token));
     }
 
 }
