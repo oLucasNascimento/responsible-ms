@@ -2,8 +2,12 @@ package com.sportsfinance.responsible.exception.handler;
 
 import com.sportsfinance.responsible.exception.AlreadyExistsException;
 import com.sportsfinance.responsible.exception.UnauthorizedException;
+import org.apache.coyote.BadRequestException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -60,4 +64,19 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<RestErrorMessage> methodArgumentNotValidException(MethodArgumentNotValidException exception, WebRequest request) {
+        String timestamp = LocalDateTime.now().toString();
+        String path = request.getDescription(false).replace("uri=", "");
+        String errorCode = "VALIDATION_ERROR";
+        String message = exception.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        RestErrorMessage errorMessage = new RestErrorMessage(
+                HttpStatus.BAD_REQUEST,
+                message,
+                timestamp,
+                path,
+                errorCode
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+    }
 }

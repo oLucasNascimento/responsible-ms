@@ -5,6 +5,7 @@ import com.sportsfinance.responsible.api.dto.CreateResponsibleDTO;
 import com.sportsfinance.responsible.api.dto.ResponsibleLoginDTO;
 import com.sportsfinance.responsible.config.security.TokenService;
 import com.sportsfinance.responsible.domain.service.ResponsibleService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class ResponsibleController {
     private TokenService tokenService;
 
     @PostMapping("/create")
-    public ResponseEntity<CreateResponsibleDTO> createResponsible(@RequestBody CreateResponsibleDTO createResponsibleDTO) {
+    public ResponseEntity<CreateResponsibleDTO> createResponsible(@RequestBody @Valid CreateResponsibleDTO createResponsibleDTO) {
         CreateResponsibleDTO responsible = this.service.createResponsible(createResponsibleDTO);
         return ResponseEntity.ok(responsible);
     }
