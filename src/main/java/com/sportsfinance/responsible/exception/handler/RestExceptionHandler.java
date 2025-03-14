@@ -2,10 +2,7 @@ package com.sportsfinance.responsible.exception.handler;
 
 import com.sportsfinance.responsible.exception.AlreadyExistsException;
 import com.sportsfinance.responsible.exception.UnauthorizedException;
-import org.apache.coyote.BadRequestException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,7 +19,7 @@ public class RestExceptionHandler {
     protected ResponseEntity<RestErrorMessage> runTimeException(RuntimeException exception, WebRequest request) {
         String timestamp = LocalDateTime.now().toString();
         String path = request.getDescription(false).replace("uri=", "");
-        String errorCode = "RUNTIME_ERROR"; // Ou algum código apropriado
+        String errorCode = "RUNTIME_ERROR";
 
         RestErrorMessage errorMessage = new RestErrorMessage(
                 HttpStatus.INTERNAL_SERVER_ERROR,
@@ -35,10 +32,10 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(AlreadyExistsException.class)
-    protected ResponseEntity<RestErrorMessage> alreadyExists(AlreadyExistsException exception, WebRequest request) {
+    protected ResponseEntity<RestErrorMessage> alreadyExistsException(AlreadyExistsException exception, WebRequest request) {
         String timestamp = LocalDateTime.now().toString();
         String path = request.getDescription(false).replace("uri=", "");
-        String errorCode = "ALREADY_EXISTS";
+        String errorCode = "ALREADY_EXISTS_ERROR";
         RestErrorMessage errorMessage = new RestErrorMessage(
                 HttpStatus.CONFLICT,
                 exception.getMessage(),
@@ -53,7 +50,7 @@ public class RestExceptionHandler {
     protected ResponseEntity<RestErrorMessage> unauthorizedException(UnauthorizedException exception, WebRequest request) {
         String timestamp = LocalDateTime.now().toString();
         String path = request.getDescription(false).replace("uri=", "");
-        String errorCode = "UNAUTHORIZED_EXCEPTION";
+        String errorCode = "UNAUTHORIZED_ERROR";
         RestErrorMessage errorMessage = new RestErrorMessage(
                 HttpStatus.UNAUTHORIZED,
                 exception.getMessage(),
