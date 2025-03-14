@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SportsFinanceMsResponsibleApplication {
+public class ResponsibleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SportsFinanceMsResponsibleApplication.class, args);
+        SpringApplication.run(ResponsibleApplication.class, args);
     }
 
 }

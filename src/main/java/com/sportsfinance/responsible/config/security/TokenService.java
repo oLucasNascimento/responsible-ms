@@ -5,9 +5,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.sportsfinance.responsible.api.dto.AuthenticateResponsibleDTO;
 import com.sportsfinance.responsible.domain.model.Responsible;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 
 
 import java.time.Instant;
@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 @Service
+@Setter
 public class TokenService {
 
     @Value("${api.security.token.secret}")
@@ -23,11 +24,13 @@ public class TokenService {
     public String generateToken(AuthenticateResponsibleDTO responsible) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            return JWT.create()
+            String token = JWT.create()
                     .withIssuer("auth-api")
                     .withSubject(responsible.getEmail())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
+            System.out.println(token + " ########## token");
+            return token;
         } catch (JWTCreationException ex) {
             throw new RuntimeException("Error while generation token", ex);
         }
