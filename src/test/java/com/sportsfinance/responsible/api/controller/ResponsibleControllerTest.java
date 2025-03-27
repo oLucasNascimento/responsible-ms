@@ -41,7 +41,7 @@ class ResponsibleControllerTest {
     public static final String PASSWORD_ENCRYPT = PasswordEncrypt.encoder(PASSWORD_FAKE);
     public static final String PHONE = "phone";
     public static final String AVATAR = "avatar";
-    public static final long ID = 1L;
+    public static final String ID = "1";
 
     private AuthenticateResponsibleDTO authenticateResponsibleDTO;
     private CreateResponsibleDTO createResponsibleDTO;
