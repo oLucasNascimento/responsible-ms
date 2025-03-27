@@ -29,7 +29,7 @@ public class ResponsibleController {
         return ResponseEntity.ok(responsible);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth")
     public ResponseEntity<ResponsibleLoginDTO> authenticateResponsible(@RequestBody AuthenticateResponsibleDTO authResponsible) {
         String token = this.tokenService.generateToken(this.service.authenticateResponsible(authResponsible));
         return ResponseEntity.ok(new ResponsibleLoginDTO(token));
