@@ -1,9 +1,14 @@
 package com.sportsfinance.responsible.domain.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -20,6 +25,6 @@ public class Responsible {
     private String password;
     private String phoneNumber;
     private String avatar;
-    private LocalDate createDate;
-    private LocalDate updateDate;
+    private LocalDateTime createDate = LocalDateTime.now();
+    private LocalDateTime updateDate = LocalDateTime.now();
 }
